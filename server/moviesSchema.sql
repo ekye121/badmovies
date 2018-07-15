@@ -1,1 +1,14 @@
--- SET UP SCHEMA HERE
+DROP DATABASE IF EXISTS badmovies;
+
+CREATE DATABASE badmovies;
+
+USE badmovies;
+
+DROP TABLE IF EXISTS favorites;
+
+CREATE TABLE favorites (
+  id INT NOT NULL AUTO_INCREMENT,
+  movie VARCHAR(100) NOT NULL,
+  PRIMARY KEY (id)
+);
+

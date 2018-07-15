@@ -9,4 +9,20 @@ const { API_KEY } = require('../server/config.js');
 // https://www.themoviedb.org/account/signup
 // https://developers.themoviedb.org/3/discover/movie-discover
 
-// Don't forget to export your functions and require them within your server file
+// Don't forget to export your functions and require them within your 
+// server file
+
+let getApi = (genres) => {
+  let options = {
+    url: `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}`,
+
+  }
+
+  request.get(options, (err, res, body) => {
+    if (err) console.log('error in getting api from apiHelper', err)
+    else res.send(body)
+  })
+
+  Promse.all([])
+
+}
