@@ -19,11 +19,6 @@ class Movies extends React.Component {
 
   handleClick(e) {
     // e.preventDefault();
-    console.log('A MOVIE HAS BEEN CLICKED')
-    console.log('WHAT IS E', e)
-    // this.setState({
-    //   fav: e.target.value
-    // })
     return this.props.saveMovie(e)
 
   }

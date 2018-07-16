@@ -44,7 +44,7 @@ app.get('/genres', function (req, res) {
 });
 
 app.post('/save', function (req, res) {
-	// console.log('REQBODY!', req.body)
+	console.log('REQBODY!', req.body.movie)
 	db.saveFavorite(req.body.movie, (err, data) => {
 		if (err) console.log(err)
 		else res.status(201).send()

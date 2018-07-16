@@ -23,6 +23,7 @@ let getApi = (genres) => {
     else res.send(body)
   })
 
-  Promse.all([])
+
+
 
 }
