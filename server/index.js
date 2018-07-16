@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 var request = require('request')
 var axios = require('axios');
 var app = express();
+var db = require('./database.js')
 var apiHelpers = require('./apiHelpers.js');
 const { API_KEY } = require('../server/config.js');
 
@@ -43,11 +44,19 @@ app.get('/genres', function (req, res) {
 });
 
 app.post('/save', function (req, res) {
-	console.log('REQBODY!',req)
+	// console.log('REQBODY!', req.body)
+	db.saveFavorite(req.body.movie, (err, data) => {
+		if (err) console.log(err)
+		else res.status(201).send()
+	})
+
 });
 
 app.post('/delete', function (req, res) {
-
+	db.deleteFavorite(req.body.movie, (err, data) => {
+		if (err) console.log(err)
+		else res.status(201).send()
+	})
 });
 
 app.listen(3000, function () {

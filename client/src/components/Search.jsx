@@ -6,19 +6,16 @@ class Search extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      genres: [],
-      genre_id: 28
+      genres: []
     };
     this.getGenres = this.getGenres.bind(this);
     this.handleClick = this.handleClick.bind(this);
-    // this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
     this.getGenres()
     this.handleClick()
   }
-
   
   getGenres() {
     //make an axios request in this component to get the 
@@ -33,11 +30,9 @@ class Search extends React.Component {
       })
       .catch((err) => console.log('GENRES IN SEARCH', err))
   }
-  
- 
 
-  handleClick(e) { 
-    this.props.getMovies(this.state.genre_id)
+  handleClick() { 
+    this.props.getMovies()
   } 
  
   render() {
@@ -53,12 +48,9 @@ class Search extends React.Component {
         
         <select onChange={this.props.handleChange}>
           {this.state.genres.map((genre, i) => {
-            // console.log('this is genreID', genre.id)
             return <option value={genre.id} key={genre.id}>{genre.name}</option>
           })}
         </select>
-        
-      
 
         <br/><br/>
 

@@ -5,7 +5,7 @@ class Movies extends React.Component {
   constructor(props) {
     super(props);
     // this.state = {
-
+    //   fav: null
     // }
     this.handleClick = this.handleClick.bind(this);
   }
@@ -16,8 +16,16 @@ class Movies extends React.Component {
   // If you're currently showing the fave list, delete the movie instead
   // You can tell which list is currently being rendered based on whether the prop "showFaves" is false (search results) or true (fave list) (within index.jsx)
 
+
   handleClick(e) {
-    this.props.saveMovie(e)
+    // e.preventDefault();
+    console.log('A MOVIE HAS BEEN CLICKED')
+    console.log('WHAT IS E', e)
+    // this.setState({
+    //   fav: e.target.value
+    // })
+    return this.props.saveMovie(e)
+
   }
 
   render() {
@@ -25,7 +33,7 @@ class Movies extends React.Component {
       <ul className="movies">
        
         {this.props.movies.map((movie, i) => {
-          return <li className="movie_item" key={movie.id} onClick={this.handleClick}>
+          return <li className="movie_item" key={movie.id} value={movie} onClick={() => {this.handleClick(movie)} } >
             <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} />
             <div className="movie_description">
               <h2>{movie.title}</h2>

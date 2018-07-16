@@ -39,15 +39,17 @@ class App extends React.Component {
     this.setState({ currentGenre: e.target.value })
   }
 
-  saveMovie(movie) {
-    axios.post('/save')
-      .then((response) => {
+  saveMovie(movie) { console.log('MOVIE!', movie)
+    axios.post('/save', {movie: movie})
+      .then(() => {
+        // console.log('this is RESPONSE from saveMovie',response)
         let newFav = this.state.favorites.slice();
-        newFav.push(response.data)
+        newFav.push(movie)
         this.setState({
           favorites: newFav
         })
       })
+      .catch(err => console.log('saveMovie get Err', err))
   }
 
   deleteMovie() {
