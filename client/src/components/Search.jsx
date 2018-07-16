@@ -7,15 +7,16 @@ class Search extends React.Component {
     super(props)
     this.state = {
       genres: [],
-      genreId: ''
+      genre_id: 28
     };
     this.getGenres = this.getGenres.bind(this);
-    // this.getMovies = this.getMovies.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    // this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
     this.getGenres()
-    // this.getMovies()
+    this.handleClick()
   }
 
   
@@ -24,26 +25,23 @@ class Search extends React.Component {
     // list of genres from your endpoint GET GENRES
     
     axios.get('/genres')
-    .then((response) => {
-      // console.log('THIS IS RES FROM SEARCH',response.data.genres)
-      this.setState({
-        genres: response.data.genres
+      .then((response) => {
+        // console.log('THIS IS RES FROM SEARCH',response.data.genres.id)
+        this.setState({
+          genres: response.data.genres
+        })
       })
-    })
-    .catch((err) => console.log('GENRES IN SEARCH', err))
+      .catch((err) => console.log('GENRES IN SEARCH', err))
   }
   
-  // getMovies(id) {
-  //   this.props.getMovies
-  // }
+ 
 
-  onChange(e) {
-    e.preventDefault();
-    this.props.getMovies()
-  }
+  handleClick(e) { 
+    this.props.getMovies(this.state.genre_id)
+  } 
  
   render() {
-    // let searchGenre = ;
+  
     return (
       <div className="search">
 
@@ -53,18 +51,18 @@ class Search extends React.Component {
         {/* Make the select options dynamic from genres !!! */}
         {/* How can you tell which option has been selected from here? */}
         
-        <select>
-          {this.state.genres.map((genre) => {
-            return <option value={genre.id}>{genre.name}</option>
-              
+        <select onChange={this.props.handleChange}>
+          {this.state.genres.map((genre, i) => {
+            // console.log('this is genreID', genre.id)
+            return <option value={genre.id} key={genre.id}>{genre.name}</option>
           })}
         </select>
         
-        
+      
 
         <br/><br/>
 
-        <button onClick={this.onChange}>Search</button>
+        <button onClick={this.handleClick}>Search</button>
 
       </div>
     );

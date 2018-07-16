@@ -18,10 +18,11 @@ app.get('/search', function (req, res) {
 	// https://api.themoviedb.org/3/disecover/movie
 	// and sort them by horrible votes using the search parameters in the API
 
-	axios.get(`https://api.themoviedb.org/3/discover/movie/?api_key=${API_KEY}&with_genres=${genre_id}`)
+	// console.log('THIS IS REQ QUERY',req.query.genre_id)
+	
+	axios.get(`https://api.themoviedb.org/3/discover/movie?with_genres=${req.query.genre_id}&sort_by=vote_average.asc&api_key=${API_KEY}`)
 		.then((response) => {
-			console.log('this is MOVIES from api', response.data.results);
-			res.status(201).send(response.data.results);
+			res.send(response.data.results);
 		})
 		.catch((err) => console.log('GETTING MOVIES API ERR', err));
 
@@ -35,14 +36,14 @@ app.get('/genres', function (req, res) {
 	axios.get(`https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}`)
 		.then((response) => {
 			// console.log('this is genres from api', response.data.genres)
-			res.status(201).send(response.data)
+			res.send(response.data)
 		})
 		.catch((err) => console.log('GETTING GENRE API ERR', err))
 
 });
 
 app.post('/save', function (req, res) {
-
+	console.log('REQBODY!',req)
 });
 
 app.post('/delete', function (req, res) {
