@@ -4,9 +4,7 @@ import axios from 'axios';
 class Movies extends React.Component {
   constructor(props) {
     super(props);
-    // this.state = {
-    //   fav: null
-    // }
+    
     this.handleClick = this.handleClick.bind(this);
   }
 
@@ -18,15 +16,18 @@ class Movies extends React.Component {
 
 
   handleClick(e) {
-    // e.preventDefault();
-    return this.props.saveMovie(e)
+    if (this.props.showFaves) {
+      return this.props.deleteMovie(e)
+    } else {
+      return this.props.saveMovie(e)
+    }
 
   }
 
   render() {
+ 
     return (
       <ul className="movies">
-       
         {this.props.movies.map((movie, i) => {
           return <li className="movie_item" key={movie.id} value={movie} onClick={() => {this.handleClick(movie)} } >
             <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} />

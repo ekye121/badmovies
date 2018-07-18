@@ -43,19 +43,30 @@ app.get('/genres', function (req, res) {
 
 });
 
+app.get('/favs', (req, res) => {
+	db.getAllFavorites((err, result) => {
+		// console.log('what is RESULT', result)
+		if (err) console.log(err);
+		else res.send(result);
+	})
+})
+
 app.post('/save', function (req, res) {
-	console.log('REQBODY!', req.body.movie)
 	db.saveFavorite(req.body.movie, (err, data) => {
 		if (err) console.log(err)
-		else res.status(201).send()
+		else res.sendStatus(201)
 	})
 
 });
 
-app.post('/delete', function (req, res) {
-	db.deleteFavorite(req.body.movie, (err, data) => {
-		if (err) console.log(err)
-		else res.status(201).send()
+app.delete('/movie', function (req, res) {
+	console.log("REQ__", req.query.id)
+	// console.log("REQ__", req.query);
+	// console.log("REQ__", typeof req.query.movie)
+	// console.log("REQ__", req.query.movie.id)
+	db.deleteFavorite(+req.query.id, (err, result) => {
+		if (err) console.log('error in server deleting', err)
+		else res.status(201).send(result);
 	})
 });
 
